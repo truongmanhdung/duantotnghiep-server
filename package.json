@@ -25,7 +25,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon src/app.js --exec babel-node -e js" 
+    "start": "nodemon  ./app.js --exec ./node_modules/.bin/babel-node src/app.js -e js" 
   },
   "author": "",
   "license": "ISC",
