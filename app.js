@@ -1,48 +1,27 @@
 import express from 'express';
-import sors from 'cors';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
-import mongoose from "mongoose";
-import {readdirSync} from "fs";
+import cors from 'cors';
+import { readdirSync } from 'fs';
+require('dotenv').config();
 
-require("dotenv").config();
+// Router
+
 
 const app = express();
+mongoose.connect(process.env.DATABASE)
+    .then(() => console.log('DB Connected'))
+    .catch(error => console.log('DB not connected ', error))
+
+// middleware
+app.use(morgan("tiny"));
+app.use(express.json())
+app.use(cors())
 
 
+// Route
+readdirSync('./src/routes').map(route => app.use("/api", require(`./src/routes/${route}`)))
 
+const port = process.env.PORT || 8000;
 
-//connect db
-
-
-mongoose.connect(process.env.DATABASE_URI)
-.then(() => {
-    console.log("connect db successfully")
-})
-.catch(error => console.log(error));
-
-
-//middlware
-app.use(morgan('tiny'));
-app.use(express.json());
-app.use(sors());
-
-
-
-
-
-//router
-readdirSync('./src/routes').map(route => {
-    return app.use("/api",require(`./src/routes/${route}`))
-})
-
-// app.use("/api",require('./routes/auth'));
-
-// post
-const post = process.env.PORT | 8080;
-app.listen(post, () => {
-    console.log('server is running port: http://localhost:'+post);
-}) 
-
-
-
-
+app.listen(port, () => console.log('server is listening port: ', port))
