@@ -1,2 +1,5 @@
 ae nào chạy bị lỗi thì vào package.json sửa dòng "nodemon src/app.js --exec babel-node -e js"
 => "nodemon  ./app.js --exec ./node_modules/.bin/babel-node src/app.js -e js"
+
+email: dungtmph12934@fpt.edu.vn
+pass: dung0401
