@@ -20,7 +20,7 @@ app.use(cors())
 
 
 // Route
-readdirSync('./routes').map(route => app.use("/api", require(`./routes/${route}`)))
+readdirSync('./src/routes').map(route => app.use("/api", require(`./src/routes/${route}`)))
 
 const port = process.env.PORT || 8000;
 
