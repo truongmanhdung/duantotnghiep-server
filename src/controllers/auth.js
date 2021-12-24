@@ -22,3 +22,4 @@ export const currentUser = (req, res) => {
         res.json(user)
     });
 }
+// dinh cap nhat
