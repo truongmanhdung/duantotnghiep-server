@@ -1,2 +1,8 @@
 ae nào chạy bị lỗi thì vào package.json sửa dòng "nodemon src/app.js --exec babel-node -e js"
 => "nodemon  ./app.js --exec ./node_modules/.bin/babel-node src/app.js -e js"
+
+
+link db: https://cloud.mongodb.com/v2/61c5e18a39db395af9a06d95#clusters/detail/Cluster0
+Đăng nhập bằng gg email dưới
+email: dungtmph12934@fpt.edu.vn
+pass: dung0401
