@@ -4,9 +4,9 @@ import User from '../models/User';
 
 
 export const createOrUpdateUser = async (req, res) => {
-    const { email, name, picture } = req.body;
+    const { email } = req.body;
 
-    const user = await User.findOneAndUpdate({ email }, { email, name, picture }, { returnNewDocument: true });
+    const user = await User.findOneAndUpdate({ email }, req.body, { returnNewDocument: true });
     if (user) {
         res.json(user);
     } else {
@@ -28,8 +28,7 @@ export const currentUser = (req, res) => {
 
 export const signup = async (req,res) => {
     try {
-        const {email, full_name,password} = req.body;
-        const user = await new User({email, full_name,password}).save();
+        const user = await new User(req.body).save();
         res.json(user);
     } catch (error) {
         res.json({
