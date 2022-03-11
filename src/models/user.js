@@ -8,12 +8,13 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        index: true
+        index: true,
+        unique: true
     },
     picture: String,
     role: {
-        type: String,
-        default: 'subscriber'
+        type: Number,   
+        default: 0
     },
     history: {
         type: Array,

@@ -7,29 +7,18 @@ export const requiredSignin = expressJwt({
     userProperty: "auth"
 });
 
-
-export const isAuth = (req, res, next) => {
-    let user = req.profile && req.auth && req.profile._id == req.auth._id;
-
-    if (!user) {
-        res.status(403).json({
-            messenger: "Truy cập bị từ chối"
-        })
-    }
-    next();
-}
 export const isAdmin = (req, res, next) => {
     console.log(req.profile.role);
-    if (req.profile.role === 0) {
-        return res.status(403).json({
-            messenger: "Bạn không có quyền truy cập"
-        })
+    if (req.profile.role == 2) {
+        next();
     }
-    next();
+    return res.status(403).json({
+        messenger: "Bạn không có quyền truy cập"
+    })
 }
-export const userById = async (req, res, next, id) => {
+export const userById = async (req, res, next) => {
     try {
-        const user = await User.findById(id).exec(); // tìm user dựa trên ID
+        const user = await User.findOne({email: req.body.email}).exec();
         req.profile = user;
         next();
     } catch (error) {
